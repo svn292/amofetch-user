@@ -83,7 +83,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.offer.setVisibility(View.VISIBLE);
             holder.offer.setText("Flat " + shops.getOfferPercent().toString() + "% offer on all Orders");
         }
-        holder.closedLay.setVisibility(shops.getShopstatus().equalsIgnoreCase("CLOSED") ? View.VISIBLE : View.GONE);
+        if(shops.getShopstatus()!=null) {
+            holder.closedLay.setVisibility(shops.getShopstatus().equalsIgnoreCase("CLOSED") ? View.VISIBLE : View.GONE);
+        }
 //       if(shops.getav().equalsIgnoreCase("")){
 //           holder.offer.setVisibility(View.GONE);
 //            holder.restaurantInfo.setVisibility(View.GONE);
