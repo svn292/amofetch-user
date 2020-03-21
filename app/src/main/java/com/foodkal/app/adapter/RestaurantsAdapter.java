@@ -83,7 +83,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             holder.offer.setVisibility(View.VISIBLE);
             holder.offer.setText("Flat " + shops.getOfferPercent().toString() + "% offer on all Orders");
         }
-        if(shops.getShopstatus()!=null) {
+        if (shops.getShopstatus() != null) {
             holder.closedLay.setVisibility(shops.getShopstatus().equalsIgnoreCase("CLOSED") ? View.VISIBLE : View.GONE);
         }
 //       if(shops.getav().equalsIgnoreCase("")){
@@ -133,11 +133,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public void onClick(View v) {
             if (v.getId() == itemView.getId()) {
                 GlobalData.selectedShop = list.get(getAdapterPosition());
-                if (!GlobalData.selectedShop.getShopstatus().equalsIgnoreCase("CLOSED")) {
-                    context.startActivity(new Intent(context, HotelViewActivity.class).putExtra("position", getAdapterPosition()).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.anim_nothing);
-                    list.get(getAdapterPosition()).getCuisines();
-                } else Toast.makeText(context, "The Shop is closed", Toast.LENGTH_SHORT).show();
+                if (GlobalData.selectedShop.getShopstatus() != null) {
+                    if (!GlobalData.selectedShop.getShopstatus().equalsIgnoreCase("CLOSED")) {
+                        context.startActivity(new Intent(context, HotelViewActivity.class).putExtra("position", getAdapterPosition()).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.anim_nothing);
+                        list.get(getAdapterPosition()).getCuisines();
+                    } else Toast.makeText(context, "The Shop is closed", Toast.LENGTH_SHORT).show();
+
+                }
             }
         }
     }
