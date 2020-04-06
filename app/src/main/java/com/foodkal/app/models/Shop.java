@@ -70,9 +70,9 @@ public class Shop {
     @SerializedName("distance")
     @Expose
     private Double distance;
-    @SerializedName("shopstatus")
-    @Expose
-    private String shopstatus;
+//    @SerializedName("shopstatus")
+//    @Expose
+//    private String shopstatus;
     @SerializedName("cuisines")
     @Expose
     private List<Cuisine> cuisines = null;
@@ -297,13 +297,13 @@ public class Shop {
     public void setRatingStatus(Integer ratingStatus) {
         this.ratingStatus = ratingStatus;
     }
-
-    public String getShopstatus() {
-        return shopstatus;
-    }
-
-    public void setShopstatus(String shopstatus) {
-        this.shopstatus = shopstatus;
-    }
+//
+//    public String getShopstatus() {
+//        return shopstatus;
+//    }
+//
+//    public void setShopstatus(String shopstatus) {
+//        this.shopstatus = shopstatus;
+//    }
 
 }

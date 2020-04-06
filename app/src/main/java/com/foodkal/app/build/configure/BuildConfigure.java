@@ -8,8 +8,8 @@ public class BuildConfigure {
 
 
     /*   Dev Mode*/
-    public static String BASE_URL = "http://206.189.130.186/swiggy/";
-    public static String CLIENT_SECRET = "TdU96L6aL31R0ZIM57hpIuCWHvh4CTUctYj9wKVW";
+    public static String BASE_URL = "http://demo.newstartup.in/";
+    public static String CLIENT_SECRET = "vH1Fn3f3tjbn8eWonP30ygbhmpF4pmv1s8WQX0RJ";
     public static String CLIENT_ID = "2";
 
     //Pubnub for Chat

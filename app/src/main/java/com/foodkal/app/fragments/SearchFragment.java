@@ -38,8 +38,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.foodkal.app.helper.GlobalData.searchProductList;
-import static com.foodkal.app.helper.GlobalData.searchShopList;
+import static com.foodkal.app.helper.GlobalData.*;
+
+//import static com.foodkal.app.helper.GlobalData.searchProductList;
+//import static com.foodkal.app.helper.GlobalData.searchShopList;
 
 
 /**
@@ -83,12 +85,12 @@ public class SearchFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        HomeActivity.updateNotificationCount(context, GlobalData.notificationCount);
+        HomeActivity.updateNotificationCount(context, notificationCount);
         if (!input.equalsIgnoreCase("")) {
             HashMap<String, String> map = new HashMap();
             map.put("name", input);
-            if (GlobalData.profileModel != null)
-                map.put("user_id", GlobalData.profileModel.getId().toString());
+            if (profileModel != null)
+                map.put("user_id", profileModel.getId().toString());
             getSearch(map);
         }
         if (ProductsAdapter.bottomSheetDialogFragment != null)
@@ -125,8 +127,8 @@ public class SearchFragment extends Fragment {
         toolbar = (ViewGroup) getActivity().findViewById(R.id.toolbar);
         toolbar.setVisibility(View.VISIBLE);
         rootLayout.setVisibility(View.GONE);
-        GlobalData.searchProductList = new ArrayList<>();
-        GlobalData.searchShopList = new ArrayList<>();
+//        GlobalData.searchProductList = new ArrayList<>();
+//        GlobalData.searchShopList = new ArrayList<>();
         toolbarLayout = LayoutInflater.from(context).inflate(R.layout.toolbar_search, toolbar, false);
         searchEt = (EditText) toolbarLayout.findViewById(R.id.search_et);
         progressBar = (ProgressBar) toolbarLayout.findViewById(R.id.progress_bar);
@@ -174,8 +176,8 @@ public class SearchFragment extends Fragment {
                     input = s.toString();
                     HashMap<String, String> map = new HashMap();
                     map.put("name", s.toString());
-                    if (GlobalData.profileModel != null)
-                        map.put("user_id", GlobalData.profileModel.getId().toString());
+                    if (profileModel != null)
+                        map.put("user_id", profileModel.getId().toString());
                     getSearch(map);
                     searchCloseImg.setVisibility(View.VISIBLE);
                     rootLayout.setVisibility(View.VISIBLE);
@@ -193,7 +195,7 @@ public class SearchFragment extends Fragment {
             }
         });
         toolbar.addView(toolbarLayout);
-        HomeActivity.updateNotificationCount(context, GlobalData.notificationCount);
+        HomeActivity.updateNotificationCount(context, notificationCount);
         searchCloseImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

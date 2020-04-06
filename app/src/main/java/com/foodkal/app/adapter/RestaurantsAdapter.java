@@ -59,33 +59,40 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Shop shops = list.get(position);
+        Shop shops = null;
+        if (list.size()>0) {
+            shops = list.get(position);
 
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.ic_restaurant_place_holder)
-                .error(R.drawable.ic_restaurant_place_holder)
-                .priority(Priority.HIGH);
 
-        Glide
-                .with(context)
-                .load(shops.getAvatar())
-                .apply(options)
-                .thumbnail(0.5f)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(holder.dishImg);
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.ic_restaurant_place_holder)
+                    .error(R.drawable.ic_restaurant_place_holder)
+                    .priority(Priority.HIGH);
 
-        holder.restaurantName.setText(shops.getName());
-        holder.category.setText(shops.getDescription());
-        if (shops.getOfferPercent() == null) holder.offer.setVisibility(View.GONE);
-        else {
-            holder.offer.setVisibility(View.VISIBLE);
-            holder.offer.setText("Flat " + shops.getOfferPercent().toString() + "% offer on all Orders");
-        }
-        if (shops.getShopstatus() != null) {
-            holder.closedLay.setVisibility(shops.getShopstatus().equalsIgnoreCase("CLOSED") ? View.VISIBLE : View.GONE);
-        }
+            Glide
+                    .with(context)
+                    .load(shops.getAvatar())
+                    .apply(options)
+                    .thumbnail(0.5f)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.dishImg);
+
+            holder.restaurantName.setText(shops.getName());
+            holder.category.setText(shops.getDescription());
+            if (shops.getOfferPercent() == null) holder.offer.setVisibility(View.GONE);
+            else {
+                holder.offer.setVisibility(View.VISIBLE);
+                holder.offer.setText("Flat " + shops.getOfferPercent().toString() + "% offer on all Orders");
+            }
+
+
+//            holder.closedLay.setVisibility(shops.getShopstatus().equalsIgnoreCase("CLOSED") ? View.VISIBLE : View.GONE);
+
+
+
+
 //       if(shops.getav().equalsIgnoreCase("")){
 //           holder.offer.setVisibility(View.GONE);
 //            holder.restaurantInfo.setVisibility(View.GONE);
@@ -95,13 +102,13 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 //            holder.restaurantInfo.setText(shops.getAvailability());
 //        }
 
-        if (shops.getRating() != null) {
-            Double rating = new BigDecimal(shops.getRating()).setScale(1, RoundingMode.HALF_UP).doubleValue();
-            holder.rating.setText("" + rating);
-        } else
-            holder.rating.setText("No Rating");
-        holder.distanceTime.setText(shops.getEstimatedDeliveryTime().toString() + " Mins");
-
+            if (shops.getRating() != null) {
+                Double rating = new BigDecimal(shops.getRating()).setScale(1, RoundingMode.HALF_UP).doubleValue();
+                holder.rating.setText("" + rating);
+            } else
+                holder.rating.setText("No Rating");
+            holder.distanceTime.setText(shops.getEstimatedDeliveryTime().toString() + " Mins");
+        }
     }
 
     @Override
@@ -133,14 +140,12 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public void onClick(View v) {
             if (v.getId() == itemView.getId()) {
                 GlobalData.selectedShop = list.get(getAdapterPosition());
-                if (GlobalData.selectedShop.getShopstatus() != null) {
-                    if (!GlobalData.selectedShop.getShopstatus().equalsIgnoreCase("CLOSED")) {
-                        context.startActivity(new Intent(context, HotelViewActivity.class).putExtra("position", getAdapterPosition()).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.anim_nothing);
-                        list.get(getAdapterPosition()).getCuisines();
-                    } else Toast.makeText(context, "The Shop is closed", Toast.LENGTH_SHORT).show();
+//                if (!GlobalData.selectedShop.getShopstatus().equalsIgnoreCase("CLOSED")) {
+                    context.startActivity(new Intent(context, HotelViewActivity.class).putExtra("position", getAdapterPosition()).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.anim_nothing);
+                    list.get(getAdapterPosition()).getCuisines();
+//                } else Toast.makeText(context, "The Shop is closed", Toast.LENGTH_SHORT).show();
 
-                }
             }
         }
     }

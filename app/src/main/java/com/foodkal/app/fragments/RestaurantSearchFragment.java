@@ -57,8 +57,9 @@ public class RestaurantSearchFragment extends Fragment {
         restaurantsRv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         restaurantsRv.setItemAnimator(new DefaultItemAnimator());
         restaurantsRv.setHasFixedSize(true);
-        restaurantsAdapter = new RestaurantsAdapter(searchShopList, context, getActivity());
-        restaurantsRv.setAdapter(restaurantsAdapter);
+            restaurantsAdapter = new RestaurantsAdapter(searchShopList, context, getActivity());
+            restaurantsRv.setAdapter(restaurantsAdapter);
+
 
 
     }

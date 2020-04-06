@@ -97,7 +97,7 @@ public interface ApiInterface {
     Call<FavoriteList> getNotification();
 
     /*-------------SHOP--------------------*/
-
+//
     @GET("api/user/shops")
     Call<RestaurantsData> getshops(@QueryMap HashMap<String, String> params);
 
